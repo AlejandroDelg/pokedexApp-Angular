@@ -1,9 +1,23 @@
 #container{
     display:flex;
+    position: relative;
     align-items: center;
+    isolation: isolate;
+    &.seleccionado::before{
+        position: absolute;
+        content: "";
+        width: calc(100% + 8px);
+        left: -10px;
+        height: 120%;
+        background-color: #da4443;
+        z-index: -1;
+        border-radius: 5px;
+    }
 }
 #flecha{
     height: 20px;
+    padding-left: 5px;
+    padding-right: 10px;
 }
 
 #tarjeta{
