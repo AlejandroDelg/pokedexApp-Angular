@@ -1,0 +1,23 @@
+#container{
+    height: calc(100vh - 80px);
+    display:grid;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: center;
+    
+  background: repeating-linear-gradient(
+    0deg,
+    #a979e3 0px,
+    #a979e3 10px,
+    #9766d7 10px,
+    #668cd7 50px,
+    #a979e3 50px,
+    #a979e3 60px,
+    #5576c5 60px,
+    #5576c5 90px,
+    #a979e3 90px,
+  );
+}
+
+app-foto-pokemon{
+    margin-left: 70px;
+}
