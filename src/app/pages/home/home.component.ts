@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FotoPokemonComponent } from '../../components/foto-pokemon/foto-pokemon.component';
 import { TarjetaPokemonComponent } from '../../components/tarjeta-pokemon/tarjeta-pokemon.component';
 import { PokemonnService } from '../../services/pokemonn.service';
+import { Resultado } from '../../interfaces/pokeapi';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +17,15 @@ export class HomeComponent implements OnInit{
 
   }
 
+  listaPokemon:Resultado[] = [];
   ngOnInit(): void {
-    this.pokemonService.getByPage();
+    this.cargarLista();
   }
 
   async cargarLista(){
-    
+
+    this.listaPokemon = [...this.listaPokemon, ...await this.pokemonService.getByPage()];
+    console.log(this.listaPokemon)
   }
 
 }

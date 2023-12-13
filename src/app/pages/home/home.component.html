@@ -1,11 +1,9 @@
 <main id = "container">
     <app-foto-pokemon></app-foto-pokemon>
     <div id="tarjetasContainer">
-        <app-tarjeta-pokemon></app-tarjeta-pokemon>
-        <app-tarjeta-pokemon></app-tarjeta-pokemon>
-        <app-tarjeta-pokemon></app-tarjeta-pokemon>
-        <app-tarjeta-pokemon></app-tarjeta-pokemon>
-        <app-tarjeta-pokemon></app-tarjeta-pokemon>    
+        @for (pokemon of listaPokemon; track $index) {
+        <app-tarjeta-pokemon></app-tarjeta-pokemon> 
+        }
     </div>
 
 </main>
