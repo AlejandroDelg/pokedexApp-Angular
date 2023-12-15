@@ -1,9 +1,13 @@
 <main id = "container">
     <app-foto-pokemon></app-foto-pokemon>
-    <div id="tarjetasContainer">
+    <div id="tarjetasContainer" #tarjetas (scroll)="onScroll($event)">
         @for (pokemon of listaPokemon; track $index) {
         <app-tarjeta-pokemon [data]="pokemon"></app-tarjeta-pokemon> 
         }
-    </div>
+
+        @if (cargando){
+            <img src="./../../../assets/img/spinner.svg" alt= " Cargando..." id = "spinnner">
+        }
+        </div>
 
 </main>

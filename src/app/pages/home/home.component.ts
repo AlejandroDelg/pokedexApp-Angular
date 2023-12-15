@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FotoPokemonComponent } from '../../components/foto-pokemon/foto-pokemon.component';
 import { TarjetaPokemonComponent } from '../../components/tarjeta-pokemon/tarjeta-pokemon.component';
 import { PokemonnService } from '../../services/pokemonn.service';
@@ -17,16 +17,31 @@ export class HomeComponent implements OnInit{
 
   }
 
+  @ViewChild("tarjetas") tarjetasElement!:ElementRef; 
   pagina: number  = 0;
+  cargando : boolean = false;
+
   listaPokemon:Resultado[] = [];
   ngOnInit(): void {
     this.cargarLista();
+    this.pokemonService.getNgModuleById("1");
   }
 
   async cargarLista(){
-
-    this.listaPokemon = [...this.listaPokemon, ...await this.pokemonService.getByPage(20, 1)];
-    this.pagina++;
+    
+    this.cargando = true;
+    this.listaPokemon = [...this.listaPokemon, ...await this.pokemonService.getByPage(40, this.pagina)];
+    this.pagina = this.pagina + 1;
+    this.cargando = false;
   }
 
+  onScroll(e : any){
+    if(this.cargando){
+      return;
+    }
+    if(Math.round(this.tarjetasElement.nativeElement.clientHeight + this.tarjetasElement.nativeElement.scrollTop) ===
+    e.srcElement.scrollHeight){
+      this.cargarLista();
+    }
+  }
 }
