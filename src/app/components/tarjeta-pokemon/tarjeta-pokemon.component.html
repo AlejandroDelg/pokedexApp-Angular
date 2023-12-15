@@ -2,8 +2,10 @@
     <img src="./../../../assets/img/flecha.png" id = "flecha">
     <div id="tarjeta">
         <div id = "circulo"></div>
-        <img src="" alt="">
-        <span>No. 001</span>
-        <span>Charmander</span>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{number}}.png" alt="">
+        <span>No. {{number}}</span>
+        @if (data) {
+        <span>{{getCappitalLetterPokemon(data)}}</span>
+    }
     </div>
 </div>

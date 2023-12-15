@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Resultado } from '../../interfaces/pokeapi';
+import { PokemonnService } from '../../services/pokemonn.service';
 
 @Component({
   selector: 'app-tarjeta-pokemon',
@@ -7,6 +9,30 @@ import { Component } from '@angular/core';
   templateUrl: './tarjeta-pokemon.component.html',
   styleUrl: './tarjeta-pokemon.component.scss'
 })
-export class TarjetaPokemonComponent {
+export class TarjetaPokemonComponent implements OnChanges{
+  ngOnChanges(changes: SimpleChanges): void {
+    this.extraerInformacion();
+  }
 
+  constructor(private pokemonService: PokemonnService){
+
+  }
+
+  private capitalLetter: string | undefined;
+  @Input() data?: Resultado;
+
+  number: string = "0";
+
+  getCappitalLetterPokemon(pokemon: Resultado){
+      this.capitalLetter = pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1);
+    return this.capitalLetter;
+  }
+  extraerInformacion(){
+    if(this.data){
+      this.number = this.data.url;
+      this.number=  this.number.substring(34, this.number.length-1);
+    this.pokemonService.getNgModuleById(this.number);
+    }
+
+  }
 }

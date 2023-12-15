@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit{
 
   }
 
+  pagina: number  = 0;
   listaPokemon:Resultado[] = [];
   ngOnInit(): void {
     this.cargarLista();
@@ -24,8 +25,8 @@ export class HomeComponent implements OnInit{
 
   async cargarLista(){
 
-    this.listaPokemon = [...this.listaPokemon, ...await this.pokemonService.getByPage()];
-    console.log(this.listaPokemon)
+    this.listaPokemon = [...this.listaPokemon, ...await this.pokemonService.getByPage(20, 1)];
+    this.pagina++;
   }
 
 }

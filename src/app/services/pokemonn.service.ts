@@ -7,8 +7,9 @@ import { Resultado } from '../interfaces/pokeapi';
 export class PokemonnService {
 
   constructor() { }
-  async getByPage(): Promise<Resultado[]>{
-    const res = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=20&offset=")
+  async getByPage(limit: number = 20, page: number = 0): Promise<Resultado[]>{
+    const offset: number = limit* page;
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/?limit="+limit+"&offset=" + offset)
     const resJson = await res.json();
     if(resJson.results.length > 0){
       return resJson.results;
@@ -16,8 +17,12 @@ export class PokemonnService {
     return [];
   }
 
-  getNgModuleById(){
+  async getNgModuleById(id: string){
     //https://pokeapi.co/api/v2/pokemon/
+
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/"+ id)
+    const resJson = await res.json();
+    console.log(resJson);
 
   }
   getDescription(){
