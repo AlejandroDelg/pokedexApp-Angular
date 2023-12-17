@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Pokemon } from '../../interfaces/pokemon';
+import { PokemonnService } from '../../services/pokemonn.service';
 
 @Component({
   selector: 'app-foto-pokemon',
@@ -9,4 +11,10 @@ import { Component } from '@angular/core';
 })
 export class FotoPokemonComponent {
 
+  @Input() pokemon?: Pokemon;
+
+  getFrontDefault(pok: Pokemon){
+    return pok.sprites.other['official-artwork'].front_default;
+  }
+  
 }

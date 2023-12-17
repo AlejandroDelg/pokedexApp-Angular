@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Resultado } from '../../interfaces/pokeapi';
 import { PokemonnService } from '../../services/pokemonn.service';
+
 
 @Component({
   selector: 'app-tarjeta-pokemon',
@@ -21,7 +22,10 @@ export class TarjetaPokemonComponent implements OnChanges{
   private capitalLetter: string | undefined;
   @Input() data?: Resultado;
 
+  @Output() clickeado = new EventEmitter<string>();
+  @Input() seleccionado?: boolean = false;
   number: string = "0";
+  id: string = "0";
 
   getCappitalLetterPokemon(pokemon: Resultado){
       this.capitalLetter = pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1);
@@ -31,7 +35,7 @@ export class TarjetaPokemonComponent implements OnChanges{
     if(this.data){
       this.number = this.data.url;
       this.number=  this.number.substring(34, this.number.length-1);
-    this.pokemonService.getNgModuleById(this.number);
+    this.pokemonService.getById(this.number);
     }
 
   }

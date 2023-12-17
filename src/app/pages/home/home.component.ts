@@ -3,11 +3,13 @@ import { FotoPokemonComponent } from '../../components/foto-pokemon/foto-pokemon
 import { TarjetaPokemonComponent } from '../../components/tarjeta-pokemon/tarjeta-pokemon.component';
 import { PokemonnService } from '../../services/pokemonn.service';
 import { Resultado } from '../../interfaces/pokeapi';
+import { Pokemon } from '../../interfaces/pokemon';
+import { DetallesPokemonComponent } from '../../detalles-pokemon/detalles-pokemon.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FotoPokemonComponent, TarjetaPokemonComponent],
+  imports: [FotoPokemonComponent, TarjetaPokemonComponent, DetallesPokemonComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -18,13 +20,15 @@ export class HomeComponent implements OnInit{
   }
 
   @ViewChild("tarjetas") tarjetasElement!:ElementRef; 
+
   pagina: number  = 0;
   cargando : boolean = false;
+  pokemonSeleccionado?: Pokemon;
 
   listaPokemon:Resultado[] = [];
   ngOnInit(): void {
     this.cargarLista();
-    this.pokemonService.getNgModuleById("1");
+    this.pokemonService.getById("1");
   }
 
   async cargarLista(){
@@ -43,5 +47,9 @@ export class HomeComponent implements OnInit{
     e.srcElement.scrollHeight){
       this.cargarLista();
     }
+  }
+  async tarjetaClickeada(id : string){
+    this.pokemonSeleccionado = await this.pokemonService.getById(id);
+    console.log(this.pokemonSeleccionado)
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resultado } from '../interfaces/pokeapi';
+import { Pokemon } from '../interfaces/pokemon';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +18,21 @@ export class PokemonnService {
     return [];
   }
 
-  async getNgModuleById(id: string){
+  async getById(id: string):Promise<Pokemon>{
     //https://pokeapi.co/api/v2/pokemon/
 
     const res = await fetch("https://pokeapi.co/api/v2/pokemon/"+ id)
     const resJson = await res.json();
-    console.log(resJson);
+    const poke: Pokemon = resJson;
+    return poke;
 
   }
-  getDescription(){
-
+  async getDescription(id :string |number): Promise<string>{
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon-species/"+ id);
+    const resJson = await res.json();
+    console.log(resJson);
+    const texto =  resJson.flavor_text_entries.find((entry: any) => entry.language.name === "es");
+    return texto ? texto.flavor_text : "No se econtró descripción en español";
   }
 
 }
