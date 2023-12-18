@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Resultado } from '../../interfaces/pokeapi';
 import { PokemonnService } from '../../services/pokemonn.service';
+import { Pokemon } from '../../interfaces/pokemon';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class TarjetaPokemonComponent implements OnChanges{
 
   private capitalLetter: string | undefined;
   @Input() data?: Resultado;
+  @Input() fullData?: Pokemon;
 
   @Output() clickeado = new EventEmitter<string>();
   @Input() seleccionado?: boolean = false;
@@ -32,10 +34,18 @@ export class TarjetaPokemonComponent implements OnChanges{
     return this.capitalLetter;
   }
   extraerInformacion(){
-    if(this.data){
+    if(this.data && this.data.url !== ""){
       this.number = this.data.url;
       this.number=  this.number.substring(34, this.number.length-1);
     this.pokemonService.getById(this.number);
+    return;
+    }
+    if(this.fullData){
+      this.number=  this.fullData.species.url.substring(42, this.fullData.species.url.length-1);
+      this.data= {
+        name: this.fullData.name,
+        url: ""
+      }
     }
 
   }
