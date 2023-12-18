@@ -4,7 +4,9 @@
     background-color: #fceab8;
     display: grid;
     grid-template-rows: 1fr 3fr 3 fr;
-
+    -webkit-box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.75);
     .area:first-child{
     flex-grow: 1;
     background-color: #bfc3ce;
@@ -27,5 +29,29 @@
             #bfd678 2px,
             #bfd678 4px,
             );
+    }
+}
+#descripcionContainer{
+    background-color: #f8f7db;
+    display: grid;  
+    grid-template-columns: 10px 1fr 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 12px;
+    -webkit-box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 8px -1px rgba(0,0,0,0.75);
+
+    div{
+        margin-top: 5px;
+        background-color: #bbbbbb4a;
+        height: 80%;
+        width: 7px;
+        &:first-child{
+            border-radius: 0 8px 0 8px;
+        }
+        &.last-child{
+            border-radius: 8px 0 8px 0;
+        }
     }
 }
